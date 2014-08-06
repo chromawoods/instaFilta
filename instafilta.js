@@ -1,3 +1,8 @@
+/**!
+ * instaFilta
+ * Project home: https://github.com/chromawoods/instaFilta
+ * Author: Andreas Larsson - http://chromawoods.com
+ */
 ;(function($) {
 
     $.fn.instaFilta = function(options) {
