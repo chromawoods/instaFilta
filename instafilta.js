@@ -1,7 +1,9 @@
-/**!
+/*!
  * instaFilta
- * Project home: https://github.com/chromawoods/instaFilta
- * Author: Andreas Larsson - http://chromawoods.com
+ * Description: "jQuery plugin for performing in-page filtering"
+ * Version: "1.0.0"
+ * Homepage: https://github.com/chromawoods/instaFilta
+ * Author: Andreas Larsson <andreas@chromawoods.com> (http://chromawoods.com)
  */
 ;(function($) {
 
