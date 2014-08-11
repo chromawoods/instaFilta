@@ -1,6 +1,8 @@
 instaFilta
 ==========
 
+*instaFilta does in-page filtering and has absolutely nothing to do with Instagram.*
+
 Imagine that you have a web page displaying a huge list of data. It might be hard for the user to scan through all that data to find the thing he/she is interested in. instaFilta is a jQuery plugin that uses the input of a text field to perform in-page filtering, hiding non-matching items as the user types. Optionally, it can also filter out complete sections (groups of items) if there are no matching items in that section. If you don't use sections, you don't need to do anything special, it will work fine without specifying so.
 
 Options
