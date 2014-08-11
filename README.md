@@ -7,7 +7,7 @@ Imagine that you have a web page displaying a huge list of data. It might be har
 
 Live demo
 ---------
-http://chromawoods.com/instafilta/
+http://chromawoods.com/instafilta/demo/
 
 Options
 -------
