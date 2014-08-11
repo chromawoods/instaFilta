@@ -4,9 +4,9 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify');
 
 gulp.task('scripts', function() {
-    gulp.src('./instaFilta.js')
+    gulp.src('./instafilta.js')
         .pipe(jshint())
-        .pipe(rename('instaFilta.min.js'))
+        .pipe(rename('instafilta.min.js'))
         .pipe(uglify({
             preserveComments: 'some'
         }))
@@ -14,5 +14,5 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('default', function() {
-    gulp.watch('instaFilta.js', ['scripts']);
+    gulp.watch('instafilta.js', ['scripts']);
 });
