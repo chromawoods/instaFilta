@@ -12,14 +12,20 @@ http://chromawoods.com/instafilta/demo/
 Options
 -------
 
-| Option | Type | Descriptions | Optional |
+| Option | Type | Descriptions | Default value |
 |---|:-:|---|:-:|
-| targets | jQuery selector string | Classname of an individual item. | yes ('.instafilta-target') |
-| sections | jQuery selector string | Classname of the sections holding the items. | yes ('.instafilta-section') |
-| hideEmptySections | boolean | If using sections, this option decides whether to hide sections which did not have any matching items in them. | yes (true) |
-| beginsWith | boolean | We can choose to match the beginning of an item's text, or anywhere within. | yes (false) |
-| caseSensitive | boolean | Whether to ignore character casing. | yes (false) |
-| typeDelay | integer | The filtering process takes place on the keyUp event. If you have a large list of items to process, you might want to set a higher value (in milliseconds) to prevent the filtering to be able to occur so frequently. So in other words, it would kind of "wait" a bit while the user types. | yes (0) |
+| targets | jQuery selector string | Classname of an individual item. | `'.instafilta-target'` |
+| sections | jQuery selector string | Classname of the sections holding the items. | `'.instafilta-section'` |
+| matchCssClass | string | Classname of the spans indicating matching text. | `'instafilta-match'` |
+| markMatches | boolean | If true, natching text will get wrapped by a span having the class name of `matchCssClass`. | `false` |
+| hideEmptySections | boolean | If using sections, this option decides whether to hide sections which did not have any matching items in them. | `true` |
+| beginsWith | boolean | We can choose to match the beginning of an item's text, or anywhere within. | `false` |
+| caseSensitive | boolean | Whether to ignore character casing. | `false` |
+| typeDelay | integer | The filtering process takes place on the keyUp event. If you have a large list of items to process, you might want to set a higher value (in milliseconds) to prevent the filtering to be able to occur so frequently. So in other words, it would kind of "wait" a bit while the user types. | `0` |
+
+Highlighting matching text
+--------------------------
+When filtering out list items, it might be valuable to highlight exactly what part of the text was matched. We can do this using the `markMatches` option. If set to `true`, the match will get wrapped by a span, having the `matchCssClass` option CSS class. Use this class to style the match within the item text.
 
 Usage
 -----

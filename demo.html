@@ -11,6 +11,7 @@
         .section-title { color: #7b7; margin-bottom: .5em; }
         .section-list { padding: 0; margin: 0; list-style: none; }
         .section-item { display: inline-block; margin: 0 3em 0 0; }
+        .instafilta-match { color: #7b7; }
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
@@ -262,7 +263,8 @@
 
             $('#instafilta-field').instaFilta({
                 targets: '.section-item',
-                sections: '.section'
+                sections: '.section',
+                markMatches: true
             });
 
         });

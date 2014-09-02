@@ -1,7 +1,7 @@
 /*!
  * instaFilta
  * Description: "jQuery plugin for performing in-page filtering"
- * Version: "1.0.0"
+ * Version: "1.1.0"
  * Homepage: https://github.com/chromawoods/instaFilta
  * Author: Andreas Larsson <andreas@chromawoods.com> (http://chromawoods.com)
  */
@@ -13,6 +13,8 @@
 
             targets: '.instafilta-target',
             sections: '.instafilta-section',
+            matchCssClass: 'instafilta-match',
+            markMatches: false,
             hideEmptySections: true,
             beginsWith: false,
             caseSensitive: false,
@@ -47,15 +49,27 @@
             if (!term) {
                 $targets.attr('data-instafilta-hide', 'false').show();
                 $sections.show();
-                return false;
             }
             
             $targets.each(function() {
                 
                 var $item = $(this),
-                    targetText = settings.caseSensitive ? $item.text() : $item.text().toLowerCase(),
-                    matchedIndex = targetText.indexOf(term);
+                    originalText = $item.text(),
+                    targetText = settings.caseSensitive ? originalText : originalText.toLowerCase(),
+                    matchedIndex = targetText.indexOf(term),
+                    matchedText = null;
+
+                if (!$item.data('originalText')) { 
+                    $item.data('originalText', originalText); 
+                }
+
+                else { $item.html($item.data('originalText')); }
                 
+                if (matchedIndex >= 0 && settings.markMatches) {
+                    matchedText = originalText.substring(matchedIndex, matchedIndex + term.length);
+                    $item.html(originalText.replace(matchedText, '<span class="' + settings.matchCssClass + '">' + matchedText + '</span>'));
+                }
+
                 $item.attr('data-instafilta-hide', (settings.beginsWith && matchedIndex !== 0) || matchedIndex < 0 ? 'true' : 'false');
             });
             
