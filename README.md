@@ -17,7 +17,7 @@ Options
 | targets | jQuery selector string | Classname of an individual item. | `'.instafilta-target'` |
 | sections | jQuery selector string | Classname of the sections holding the items. | `'.instafilta-section'` |
 | matchCssClass | string | Classname of the spans indicating matching text. | `'instafilta-match'` |
-| markMatches | boolean | If true, matching text will get wrapped by a span having the class name of `matchCssClass`. | `false` |
+| markMatches | boolean | If true, matching text will get wrapped by a span having the class name of whatever the `matchCssClass` option is set to. | `false` |
 | hideEmptySections | boolean | If using sections, this option decides whether to hide sections which did not have any matching items in them. | `true` |
 | beginsWith | boolean | We can choose to match the beginning of an item's text, or anywhere within. | `false` |
 | caseSensitive | boolean | Whether to ignore character casing. | `false` |
