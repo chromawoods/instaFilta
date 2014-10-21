@@ -17,7 +17,7 @@ Options
 | targets | jQuery selector string | Classname of an individual item. | `'.instafilta-target'` |
 | sections | jQuery selector string | Classname of the sections holding the items. | `'.instafilta-section'` |
 | matchCssClass | string | Classname of the spans indicating matching text. | `'instafilta-match'` |
-| markMatches | boolean | If true, natching text will get wrapped by a span having the class name of `matchCssClass`. | `false` |
+| markMatches | boolean | If true, matching text will get wrapped by a span having the class name of `matchCssClass`. | `false` |
 | hideEmptySections | boolean | If using sections, this option decides whether to hide sections which did not have any matching items in them. | `true` |
 | beginsWith | boolean | We can choose to match the beginning of an item's text, or anywhere within. | `false` |
 | caseSensitive | boolean | Whether to ignore character casing. | `false` |
@@ -25,7 +25,7 @@ Options
 
 Highlighting matching text
 --------------------------
-When filtering out list items, it might be valuable to highlight exactly what part of the text was matched. We can do this using the `markMatches` option. If set to `true`, the match will get wrapped by a span, having the `matchCssClass` option CSS class. Use this class to style the match within the item text.
+When filtering out list items, it might be valuable to highlight exactly what part of the text was matched. We can do this using the `markMatches` option. If set to `true`, the match will get wrapped by a span, having the `matchCssClass` option CSS class (which defaults to `instafilta-match`). Use this class to style the match within the item text.
 
 Usage
 -----
