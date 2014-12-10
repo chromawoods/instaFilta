@@ -52,22 +52,24 @@
             }
             
             $targets.each(function() {
-                
-                var $item = $(this),
-                    originalText = $item.text(),
+
+                var $item = $(this);
+
+                if (!$item.data('originalText')) {
+                    $item.data('originalHtml', $item.html());
+                    $item.data('originalText', $item.text());
+                }
+
+                var originalText = $item.data('originalText'),
                     targetText = settings.caseSensitive ? originalText : originalText.toLowerCase(),
                     matchedIndex = targetText.indexOf(term),
                     matchedText = null;
 
-                if (!$item.data('originalText')) { 
-                    $item.data('originalText', originalText); 
-                }
-
-                else { $item.html($item.data('originalText')); }
-                
                 if (matchedIndex >= 0 && settings.markMatches) {
                     matchedText = originalText.substring(matchedIndex, matchedIndex + term.length);
-                    $item.html(originalText.replace(matchedText, '<span class="' + settings.matchCssClass + '">' + matchedText + '</span>'));
+                    var newText = originalText.replace(matchedText, '<span class="' + settings.matchCssClass + '">' + matchedText + '</span>');
+
+                    $item.html($item.data('originalHtml').replace(originalText, newText));
                 }
 
                 $item.attr('data-instafilta-hide', (settings.beginsWith && matchedIndex !== 0) || matchedIndex < 0 ? 'true' : 'false');
