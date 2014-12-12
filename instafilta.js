@@ -8,9 +8,9 @@
 ;(function($) {
 
     $.fn.instaFilta = function(options) {
-    
-        var settings = $.extend({
 
+        var settings = $.extend({
+            scope: null,
             targets: '.instafilta-target',
             sections: '.instafilta-section',
             matchCssClass: 'instafilta-match',
@@ -21,79 +21,91 @@
             typeDelay: 0
 
         }, options);
-        
 
-        var typeTimer,
-            $targets = $(settings.targets),
-            $sections = $(settings.sections),
-            lastTerm = '';
-        
-        
-        var hideEmptySections = function() {
+        this.each(function() {
 
-            $sections.each(function() {
-                var $section = $(this);
-                $section.toggle(!!($section.find('[data-instafilta-hide="false"]').length));
-            });
+            var typeTimer,
+                $targets,
+                $sections,
+                lastTerm = '';
 
-        };
-        
-        
-        var doFiltering = function(term) {
-            
-            term = settings.caseSensitive ? term : term.toLowerCase();
-            
-            if (lastTerm === term) { return false; }
-            else { lastTerm = term; }
-
-            if (!term) {
-                $targets.attr('data-instafilta-hide', 'false').show();
-                $sections.show();
+            if(settings.scope != null) {
+                var $scopeElement = $(this).closest(settings.scope);
+                $targets = $scopeElement.find(settings.targets);
+                $sections = $scopeElement.find(settings.sections);
+            } else {
+                $targets = $(settings.targets);
+                $sections = $(settings.sections);
             }
-            
-            $targets.each(function() {
 
-                var $item = $(this);
+            var hideEmptySections = function() {
 
-                if (!$item.data('originalText')) {
-                    $item.data('originalHtml', $item.html());
-                    $item.data('originalText', $item.text());
+                $sections.each(function() {
+                    var $section = $(this);
+                    $section.toggle(!!($section.find('[data-instafilta-hide="false"]').length));
+                });
+
+            };
+
+
+            var doFiltering = function(term) {
+
+                term = settings.caseSensitive ? term : term.toLowerCase();
+
+                if (lastTerm === term) { return false; }
+                else { lastTerm = term; }
+
+                if (!term) {
+                    $targets.attr('data-instafilta-hide', 'false').show();
+                    $sections.show();
                 }
 
-                var originalText = $item.data('originalText'),
-                    targetText = settings.caseSensitive ? originalText : originalText.toLowerCase(),
-                    matchedIndex = targetText.indexOf(term),
-                    matchedText = null;
+                $targets.each(function() {
 
-                if (matchedIndex >= 0 && settings.markMatches) {
-                    matchedText = originalText.substring(matchedIndex, matchedIndex + term.length);
-                    var newText = originalText.replace(matchedText, '<span class="' + settings.matchCssClass + '">' + matchedText + '</span>');
+                    var $item = $(this);
 
-                    $item.html($item.data('originalHtml').replace(originalText, newText));
-                }
+                    if (!$item.data('originalText')) {
+                        $item.data('originalHtml', $item.html());
+                        $item.data('originalText', $item.text());
+                    }
 
-                $item.attr('data-instafilta-hide', (settings.beginsWith && matchedIndex !== 0) || matchedIndex < 0 ? 'true' : 'false');
-            });
-            
-            $targets.filter('[data-instafilta-hide="true"]').hide();
-            $targets.filter('[data-instafilta-hide="false"]').show();
-            
-            settings.hideEmptySections && hideEmptySections();            
-        };
-        
-        
-        var onKeyUp = function() {
-            var $field = $(this);
-            
-            clearTimeout(typeTimer);
-            
-            typeTimer = setTimeout(function() {
-                doFiltering($field.val());
-            }, settings.typeDelay); 
-        };
-        
-        
-        return $(this).on('keyup', onKeyUp);
+                    var originalText = $item.data('originalText'),
+                        targetText = settings.caseSensitive ? originalText : originalText.toLowerCase(),
+                        matchedIndex = targetText.indexOf(term),
+                        matchedText = null;
+
+                    if (matchedIndex >= 0 && settings.markMatches) {
+                        matchedText = originalText.substring(matchedIndex, matchedIndex + term.length);
+                        var newText = originalText.replace(matchedText, '<span class="' + settings.matchCssClass + '">' + matchedText + '</span>');
+
+                        $item.html($item.data('originalHtml').replace(originalText, newText));
+                    }
+
+                    $item.attr('data-instafilta-hide', (settings.beginsWith && matchedIndex !== 0) || matchedIndex < 0 ? 'true' : 'false');
+                });
+
+                $targets.filter('[data-instafilta-hide="true"]').hide();
+                $targets.filter('[data-instafilta-hide="false"]').show();
+
+                settings.hideEmptySections && hideEmptySections();
+            };
+
+
+            var onKeyUp = function() {
+                var $field = $(this);
+
+                clearTimeout(typeTimer);
+
+                typeTimer = setTimeout(function() {
+                    doFiltering($field.val());
+                }, settings.typeDelay);
+            };
+
+
+            $(this).on('keyup', onKeyUp);
+        });
+
+        return this;
     };
-    
+
 }(jQuery));
