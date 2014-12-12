@@ -30,11 +30,22 @@ When filtering out list items, it might be valuable to highlight exactly what pa
 
 Usage
 -----
-Call instaFilta on the text field(s) that should be observed, passing any of the options in an object. In the below example, we have specified that we only want to match items that begin with whatever the user types in the text field.
-If you want to use instaFilta on multiple text inputs, be sure to specify the scope option.
+Call instaFilta on the text field that should be observed, passing any of the options in an object. In the below example, we have specified that we only want to match items that begin with whatever the user types in the text field.
+
 
 ```javascript
 $('#username-filtering').instaFilta({
+    targets: '.username',
+    beginsWith: true
+});
+
+Multiple Filter Usage
+---------------------
+If you have want to use instaFilta on more than one text input, you must supply instaFilta with a scope element selector. The scope element must enclose both the text input field and the targets it should filter.
+
+```javascript
+$('#username-filtering').instaFilta({
+    scope: '.containerDiv',
     targets: '.username',
     beginsWith: true
 });
