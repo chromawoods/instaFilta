@@ -38,6 +38,7 @@ $('#username-filtering').instaFilta({
     targets: '.username',
     beginsWith: true
 });
+```
 
 Multiple Filter Usage
 ---------------------
@@ -49,3 +50,4 @@ $('#username-filtering').instaFilta({
     targets: '.username',
     beginsWith: true
 });
+```
