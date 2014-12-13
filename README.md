@@ -22,6 +22,9 @@ Options
 | beginsWith | boolean | We can choose to match the beginning of an item's text, or anywhere within. | `false` |
 | caseSensitive | boolean | Whether to ignore character casing. | `false` |
 | typeDelay | integer | The filtering process takes place on the keyUp event. If you have a large list of items to process, you might want to set a higher value (in milliseconds) to prevent the filtering to be able to occur so frequently. So in other words, it would kind of "wait" a bit while the user types. | `0` |
+| replaceAccents | boolean | When checking a possible match, accents specified in `accentsToFind` are replaced in the item's text (only for the current comparison, **without altering** the original item text) by their corresponding value found in `replaceWith`. As a consequence, the search becomes insensitive to accentuation (e.g. the term 'jose' will be a positive match both for 'jose' and for 'josé'). | `false` |
+| accentsToFind | string | Accents to be found and replaced (just for the comparison, without altering the page's content) in the item's text. | `àáäâãèéëêìíïîòóöôõùúüûç` |
+| replaceWith | string | Characters that will replace their corresponding accentuated character (i.e. the one that has the same position in the `accentsToFind` string) if the `replaceAccents` option is set to `true`. | `aaaaaeeeeiiiiooooouuuuc` |
 
 Highlighting matching text
 --------------------------
