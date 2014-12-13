@@ -18,6 +18,9 @@
             hideEmptySections: true,
             beginsWith: false,
             caseSensitive: false,
+            replaceAccents: false,
+            accentsToFind: 'àáäâãèéëêìíïîòóöôõùúüûç',
+            replaceWith: 'aaaaaeeeeiiiiooooouuuuc',
             typeDelay: 0
 
         }, options);
@@ -42,6 +45,7 @@
         var doFiltering = function(term) {
             
             term = settings.caseSensitive ? term : term.toLowerCase();
+            term = settings.replaceAccents ? replaceAccents(term) : term;
             
             if (lastTerm === term) { return false; }
             else { lastTerm = term; }
@@ -55,9 +59,13 @@
                 
                 var $item = $(this),
                     originalText = $item.text(),
-                    targetText = settings.caseSensitive ? originalText : originalText.toLowerCase(),
-                    matchedIndex = targetText.indexOf(term),
+                    targetText = originalText,
                     matchedText = null;
+
+                targetText = settings.caseSensitive ? originalText : originalText.toLowerCase();
+                targetText = settings.replaceAccents ? replaceAccents(targetText) : targetText;
+
+                var matchedIndex = targetText.indexOf(term);
 
                 if (!$item.data('originalText')) { 
                     $item.data('originalText', originalText); 
@@ -79,6 +87,14 @@
             settings.hideEmptySections && hideEmptySections();            
         };
         
+        var replaceAccents = function (term) {
+            
+            for (i = 0; i < settings.accentsToFind.length; i++) {
+                term = term.replace(new RegExp(settings.accentsToFind.charAt(i), 'g'), settings.replaceWith.charAt(i));
+            }
+
+            return term;
+        };
         
         var onKeyUp = function() {
             var $field = $(this);
@@ -89,7 +105,6 @@
                 doFiltering($field.val());
             }, settings.typeDelay); 
         };
-        
         
         return $(this).on('keyup', onKeyUp);
     };
