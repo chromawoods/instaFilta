@@ -22,6 +22,7 @@ Options
 | beginsWith | boolean | We can choose to match the beginning of an item's text, or anywhere within. | `false` |
 | caseSensitive | boolean | Whether to ignore character casing. | `false` |
 | typeDelay | integer | The filtering process takes place on the keyUp event. If you have a large list of items to process, you might want to set a higher value (in milliseconds) to prevent the filtering to be able to occur so frequently. So in other words, it would kind of "wait" a bit while the user types. | `0` |
+| scope | jQuery selector string | Classname of an element in which the input field and the targets are enclosed. Use this if you want to use multiple filter sections on your page | `null` |
 
 Highlighting matching text
 --------------------------
@@ -31,8 +32,22 @@ Usage
 -----
 Call instaFilta on the text field that should be observed, passing any of the options in an object. In the below example, we have specified that we only want to match items that begin with whatever the user types in the text field.
 
+
 ```javascript
 $('#username-filtering').instaFilta({
     targets: '.username',
     beginsWith: true
 });
+```
+
+Multiple Filter Usage
+---------------------
+If you have want to use instaFilta on more than one text input, you must supply instaFilta with a scope element selector. The scope element must enclose both the text input field and the targets it should filter.
+
+```javascript
+$('#username-filtering').instaFilta({
+    scope: '.containerDiv',
+    targets: '.username',
+    beginsWith: true
+});
+```
