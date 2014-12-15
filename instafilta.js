@@ -1,9 +1,9 @@
 /*!
  * instaFilta
  * Description: "jQuery plugin for performing in-page filtering"
- * Version: "1.1.0"
  * Homepage: https://github.com/chromawoods/instaFilta
  * Author: Andreas Larsson <andreas@chromawoods.com> (http://chromawoods.com)
+ * Contributions: Jaap-Jan Frans
  */
 ;(function($) {
 
@@ -27,10 +27,11 @@
             var typeTimer,
                 $targets,
                 $sections,
+                $scopeElement,
                 lastTerm = '';
 
             if(settings.scope != null) {
-                var $scopeElement = $(this).closest(settings.scope);
+                $scopeElement = $(this).closest(settings.scope);
                 $targets = $scopeElement.find(settings.targets);
                 $sections = $scopeElement.find(settings.sections);
             } else {
@@ -72,11 +73,12 @@
                     var originalText = $item.data('originalText'),
                         targetText = settings.caseSensitive ? originalText : originalText.toLowerCase(),
                         matchedIndex = targetText.indexOf(term),
-                        matchedText = null;
+                        matchedText = null,
+                        newText = null;
 
                     if (matchedIndex >= 0 && settings.markMatches) {
                         matchedText = originalText.substring(matchedIndex, matchedIndex + term.length);
-                        var newText = originalText.replace(matchedText, '<span class="' + settings.matchCssClass + '">' + matchedText + '</span>');
+                        newText = originalText.replace(matchedText, '<span class="' + settings.matchCssClass + '">' + matchedText + '</span>');
 
                         $item.html($item.data('originalHtml').replace(originalText, newText));
                     }
