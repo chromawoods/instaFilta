@@ -23,10 +23,33 @@ Options
 | caseSensitive | boolean | Whether to ignore character casing. | `false` |
 | typeDelay | integer | The filtering process takes place on the keyUp event. If you have a large list of items to process, you might want to set a higher value (in milliseconds) to prevent the filtering to be able to occur so frequently. So in other words, it would kind of "wait" a bit while the user types. | `0` |
 | scope | jQuery selector string | Classname of an element in which the input field and the targets are enclosed. Use this if you want to use multiple filter sections on your page | `null` |
+| useSynonyms | boolean | When set to true, this option will also match user input against a synonym list. | `true` |
+| synonyms | object array | List of objects that contain synonyms. See section below. | *Common accents, see below.* |
 
 Highlighting matching text
 --------------------------
 When filtering out list items, it might be valuable to highlight exactly what part of the text was matched. We can do this using the `markMatches` option. If set to `true`, the match will get wrapped by a span, having the `matchCssClass` option CSS class (which defaults to `instafilta-match`). Use this class to style the match within the item text.
+
+*Note: If you use this feature, you might encounter incorrect highlighting if you are using synonyms that are more than one character.*
+
+Synonyms
+--------
+You can use synonyms to allow several characters or even words to match one single user input. This is helpful for accent letters but it can also be used for whole words, like aliases. Synonyms are used by default and the synonym list contains the following:
+
+```
+[
+    { src: 'à,á,å,ä,â,ã', dst: 'a' },
+    { src: 'À,Á,Å,Ä,Â,Ã', dst: 'A' },
+    { src: 'è,é,ë,ê', dst: 'e' },
+    { src: 'È,É,Ë,Ê', dst: 'E' },
+    { src: 'Ì,Í,Ï,Î', dst: 'I' },
+    { src: 'Ò,Ó,Ö,Ô,Õ', dst: 'O' },
+    { src: 'Ù,Ú,Ü,Û', dst: 'u' },
+    { src: 'Ç', dst: 'C' }
+]
+```
+`src` contains a list of characters or words that should match `dst`, other than the input itself of course. As an example, if the user has typed `Therese`, it will match both `Therese` *and* `Thérèse`.
+
 
 Usage
 -----
