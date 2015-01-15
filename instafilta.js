@@ -31,7 +31,8 @@
                 { src: 'Ì,Í,Ï,Î', dst: 'I' },
                 { src: 'Ò,Ó,Ö,Ô,Õ', dst: 'O' },
                 { src: 'Ù,Ú,Ü,Û', dst: 'u' },
-                { src: 'Ç', dst: 'C' }
+                { src: 'Ç', dst: 'C' },
+                { src: 'æ', dst: 'ae' }
             ]
         }, options);
 
