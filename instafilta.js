@@ -1,6 +1,6 @@
 /*!
  * instaFilta
- * Version: 1.2
+ * Version: 1.2.1
  * Description: jQuery plugin for performing in-page filtering
  * Homepage and documentation: https://github.com/chromawoods/instaFilta
  * Author: Andreas Larsson <andreas@chromawoods.com> (http://chromawoods.com)
@@ -13,7 +13,7 @@
         /* Default settings. */
         var settings = $.extend({
 
-            scope: null, // 
+            scope: null,
             targets: '.instafilta-target',
             sections: '.instafilta-section',
             matchCssClass: 'instafilta-match',
@@ -28,9 +28,13 @@
                 { src: 'À,Á,Å,Ä,Â,Ã', dst: 'A' },
                 { src: 'è,é,ë,ê', dst: 'e' },
                 { src: 'È,É,Ë,Ê', dst: 'E' },
+                { src: 'ì,í,ï,î', dst: 'i' },
                 { src: 'Ì,Í,Ï,Î', dst: 'I' },
+                { src: 'ò,ó,ö,ô,õ', dst: 'o' },
                 { src: 'Ò,Ó,Ö,Ô,Õ', dst: 'O' },
-                { src: 'Ù,Ú,Ü,Û', dst: 'u' },
+                { src: 'ù,ú,ü,û', dst: 'u' },
+                { src: 'Ù,Ú,Ü,Û', dst: 'U' },
+                { src: 'ç', dst: 'c' },
                 { src: 'Ç', dst: 'C' },
                 { src: 'æ', dst: 'ae' }
             ]
