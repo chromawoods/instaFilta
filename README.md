@@ -42,10 +42,15 @@ You can use synonyms to allow several characters or even words to match one sing
     { src: 'À,Á,Å,Ä,Â,Ã', dst: 'A' },
     { src: 'è,é,ë,ê', dst: 'e' },
     { src: 'È,É,Ë,Ê', dst: 'E' },
+    { src: 'ì,í,ï,î', dst: 'i' },
     { src: 'Ì,Í,Ï,Î', dst: 'I' },
+    { src: 'ò,ó,ö,ô,õ', dst: 'o' },
     { src: 'Ò,Ó,Ö,Ô,Õ', dst: 'O' },
-    { src: 'Ù,Ú,Ü,Û', dst: 'u' },
-    { src: 'Ç', dst: 'C' }
+    { src: 'ù,ú,ü,û', dst: 'u' },
+    { src: 'Ù,Ú,Ü,Û', dst: 'U' },
+    { src: 'ç', dst: 'c' },
+    { src: 'Ç', dst: 'C' },
+    { src: 'æ', dst: 'ae' }
 ]
 ```
 `src` contains a list of characters or words that should match `dst`, other than the input itself of course. As an example, if the user has typed `Therese`, it will match both `Therese` *and* `Thérèse`.
