@@ -16,6 +16,7 @@ Options
 |---|:-:|---|:-:|
 | targets | jQuery selector string | Classname of an individual item. | `'.instafilta-target'` |
 | sections | jQuery selector string | Classname of the sections holding the items. | `'.instafilta-section'` |
+| categoryDataAttr | string | Name of data attributes in which to look for categories. (read more below) | `'instafilta-category'` |
 | matchCssClass | string | Classname of the spans indicating matching text. | `'instafilta-match'` |
 | markMatches | boolean | If true, matching text will get wrapped by a span having the class name of whatever the `matchCssClass` option is set to. | `false` |
 | hideEmptySections | boolean | If using sections, this option decides whether to hide sections which did not have any matching items in them. | `true` |
@@ -26,11 +27,23 @@ Options
 | useSynonyms | boolean | When set to true, this option will also match user input against a synonym list. | `true` |
 | synonyms | object array | List of objects that contain synonyms. See section below. | *Common accents, see below.* |
 
+
+Methods
+-------
+
+| Name | Description | Parameters | Returns |
+|---|:-:|---|:-:|
+| filterTerm | Can be used to programmatically apply a filter. For normal simple usage, you will probably not be needing this. | Filtering term (string) | Matched elements (jQuery) |
+| filterCategory | Applies a category filter that matches data attributes (see `categoryDataAttr`). | Category name (string) | Matched elements (jQuery) |
+
+
+
 Highlighting matching text
 --------------------------
 When filtering out list items, it might be valuable to highlight exactly what part of the text was matched. We can do this using the `markMatches` option. If set to `true`, the match will get wrapped by a span, having the `matchCssClass` option CSS class (which defaults to `instafilta-match`). Use this class to style the match within the item text.
 
 *Note: If you use this feature, you might encounter incorrect highlighting if you are using synonyms that are more than one character.*
+
 
 Synonyms
 --------
@@ -54,6 +67,29 @@ You can use synonyms to allow several characters or even words to match one sing
 ]
 ```
 `src` contains a list of characters or words that should match `dst`, other than the input itself of course. As an example, if the user has typed `Therese`, it will match both `Therese` *and* `Thérèse`.
+
+
+Categories
+----------
+By appending a data-attribute named according to setting `categoryDataAttr`, it is possible to "label" sections and/or individual items. Use the `filterCategory` method to apply the category filter. You would typically use this together with a *select* element. Both sections and target items can belong to multiple categories, just separate them with a comma.
+
+In the below example, we have chosen to categorize individual items. Note that an item can belong to several categories.
+
+```html
+<li class="instafilta-target" data-instafilta-category="human">John Connor</li>
+<li class="instafilta-target" data-instafilta-category="machine">Terminator</li>
+<li class="instafilta-target" data-instafilta-category="human,machine">RoboCop</li>
+```
+
+In the next example, an entire section has been defined as a category.
+
+```html
+<ul class="instafilta-section" data-instafilta-category="machines">
+    <li class="instafilta-target">Johnny 5</li>
+    <li class="instafilta-target">R2-D2</li>
+    <li class="instafilta-target">RoboCop</li>
+</ul>
+```
 
 
 Usage

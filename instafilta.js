@@ -1,6 +1,6 @@
 /*!
  * instaFilta
- * Version: 1.2.1
+ * Version: 1.3
  * Description: jQuery plugin for performing in-page filtering
  * Homepage and documentation: https://github.com/chromawoods/instaFilta
  * Author: Andreas Larsson <andreas@chromawoods.com> (http://chromawoods.com)
@@ -8,7 +8,12 @@
  */
 ;(function($) {
 
+
     $.fn.instaFilta = function(options) {
+
+        var _filterTerm = null,
+            _filterCategory = null;
+
 
         /* Default settings. */
         var settings = $.extend({
@@ -16,6 +21,7 @@
             scope: null,
             targets: '.instafilta-target',
             sections: '.instafilta-section',
+            categoryDataAttr: 'instafilta-category',
             matchCssClass: 'instafilta-match',
             markMatches: false,
             hideEmptySections: true,
@@ -104,18 +110,31 @@
             };
 
 
+            var applyResults = function() {
+                var $shown = $targets.filter('[data-instafilta-hide="false"]').show();
+
+                $targets.filter('[data-instafilta-hide="true"]').hide();
+
+                settings.hideEmptySections && hideEmptySections();
+                return $shown;
+            };
+
+
+            var showAll = function() {
+                $targets.attr('data-instafilta-hide', 'false').show();
+                $sections.show();
+            };
+
+
             /* Main filtering function. */
-            var doFiltering = function(term) {
+            _filterTerm = function(term) {
 
                 term = settings.caseSensitive ? term : term.toLowerCase();
 
                 if (lastTerm === term) { return false; }
                 else { lastTerm = term; }
 
-                if (!term) {
-                    $targets.attr('data-instafilta-hide', 'false').show();
-                    $sections.show();
-                }
+                term || showAll();
 
                 /* Iterate through associated targets and find matches. */
                 $targets.each(function() {
@@ -155,10 +174,47 @@
                     $item.attr('data-instafilta-hide', (settings.beginsWith && matchedIndex !== 0) || matchedIndex < 0 ? 'true' : 'false');
                 });
 
-                $targets.filter('[data-instafilta-hide="true"]').hide();
-                $targets.filter('[data-instafilta-hide="false"]').show();
+                return applyResults();
+            };
 
-                settings.hideEmptySections && hideEmptySections();
+
+            /* Filter items depending on category data attribute. Categories can be comma separated. */
+            _filterCategory = function(category) {
+
+                var getCats = function($elem) {
+                    return ($elem.data(settings.categoryDataAttr) || '').split(',');
+                };
+
+                /* Find sections that are categories. */
+                $sections.each(function() {
+
+                    var $sect = $(this)
+                        sectCategories = getCats($sect);
+
+                    /* Find items that belong to categories. */
+                    $sect.find(settings.targets).each(function() {
+
+                        var $item = $(this), 
+                            hasCategory = false,
+                            categories = getCats($item).concat(sectCategories);
+
+                        for (var i = 0; i < categories.length; i++) {
+
+                            /* Strip whitespace and compare. */
+                            if (category === categories[i].replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')) { 
+                                hasCategory = true;
+                                break;
+                            }
+                        }
+
+                        $item.html($item.data('originalText'))
+                            .attr('data-instafilta-hide', hasCategory ? false : true);
+                    });
+
+                });
+
+                category || showAll();
+                return applyResults();
             };
 
 
@@ -169,13 +225,18 @@
                 clearTimeout(typeTimer);
 
                 typeTimer = setTimeout(function() {
-                    doFiltering($field.val());
+                    _filterTerm($field.val());
                 }, settings.typeDelay);
             });
 
         });
 
-        return this;
+
+        return { 
+            filterTerm: _filterTerm,
+            filterCategory: _filterCategory
+        };
+
     };
 
 }(jQuery));

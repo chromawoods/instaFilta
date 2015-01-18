@@ -6,7 +6,7 @@
     <title>instaFilta demo</title>
     <style type="text/css">
         body { font-family: sans-serif; font-size: .9em; color: #333; margin: 1em 2%; }
-        input[type="text"] { padding: .4em; border: 1px solid #ccc; border-radius: 4px; font-size: 1.2em; }
+        input[type="text"], select { padding: .4em; border: 1px solid #ccc; border-radius: 4px; font-size: 1.2em; }
         .scope { width: 46%; margin: 1em 2%; float: left; }
         .section { border-bottom: 1px dashed #ccc; padding: .5em; }
         .section-title { color: #7b7; margin-bottom: .5em; }
@@ -23,12 +23,21 @@
     <div class="scope" id="scope1">
         <input type="text" id="instafilta-field1" placeholder="Type to filter">
 
+        <select id="instafilta-categories">
+            <option value="">Categories</option>
+            <option value="starwars">Star Wars</option>
+            <option value="hitchhikers">The Hitchhiker's Guide to the Galaxy</option>
+            <option value="cars">Cars</option>
+            <option value="r">Names that begin with 'R'</option>
+        </select>
+
         <div class="section">
             <h2 class="section-title">A</h2>
             <ul class="section-list">
                 <li class="section-item">Amy</li>
-                <li class="section-item">Anakin Skywalker</li>
+                <li class="section-item" data-instafilta-category="starwars">Anakin Skywalker</li>
                 <li class="section-item">Albert</li>
+                <li class="section-item" data-instafilta-category="hitchhikers">Arthur</li>
                 <li class="section-item">Andy Panda</li>
             </ul>
         </div>
@@ -50,7 +59,7 @@
                 <li class="section-item">Carl</li>
                 <li class="section-item">Cindy</li>
                 <li class="section-item">Cameron</li>
-                <li class="section-item">C-3PO</li>
+                <li class="section-item" data-instafilta-category="starwars">C-3PO</li>
             </ul>
         </div>
         
@@ -78,6 +87,7 @@
             <h2 class="section-title">F</h2>
             <ul class="section-list">
                 <li class="section-item">Formulæ</li>
+                <li class="section-item" data-instafilta-category="hitchhikers, cars">Ford</li>
                 <li class="section-item">Frank</li>
                 <li class="section-item">Fridah</li>
                 <li class="section-item">Florian</li>
@@ -185,7 +195,7 @@
             </ul>
         </div>
 
-        <div class="section">
+        <div class="section" data-instafilta-category="r">
             <h2 class="section-title">R</h2>
             <ul class="section-list">
                 <li class="section-item">Raul</li>
@@ -211,7 +221,7 @@
                 <li class="section-item">Thérèse</li>
                 <li class="section-item">Tyson</li>
                 <li class="section-item">Terry</li>
-                <li class="section-item">Taun-taun</li>
+                <li class="section-item" data-instafilta-category="starwars">Taun-taun</li>
                 <li class="section-item">Taylor</li>
             </ul>
         </div>
@@ -258,7 +268,7 @@
         <div class="section">
             <h2 class="section-title">Z</h2>
             <ul class="section-list">
-                <li class="section-item">Zaphod</li>
+                <li class="section-item" data-instafilta-category="hitchhikers">Zaphod</li>
             </ul>
         </div>
 
@@ -284,11 +294,21 @@
     <script>
         $(function() {
 
-            $('#instafilta-field1').instaFilta({
+            var $field1 = $('#instafilta-field1'),
+                $select = $('#instafilta-categories');
+
+            var filter1 = $field1.on('keyup', function() { 
+                $select.val(''); 
+            }).instaFilta({
                 scope: '#scope1',
                 targets: '.section-item',
                 sections: '.section',
                 markMatches: true
+            });
+
+            $select.on('change', function() {
+                $field1.val('');
+                filter1.filterCategory($(this).val());
             });
 
             $('#instafilta-field2').instaFilta({
