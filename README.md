@@ -19,13 +19,13 @@ Options
 | sections | jQuery selector string | Classname of the sections holding the items. | `'.instafilta-section'` |
 | categoryDataAttr | string | Name of data attributes in which to look for categories. (read more below) | `'instafilta-category'` |
 | matchCssClass | string | Classname of the spans indicating matching text. | `'instafilta-match'` |
-| itemsHideEffect | string | What jQuery effect to use for hiding items (slideUp etc.). | `hide` |
+| itemsHideEffect | string | What jQuery effect to use for hiding items (slideUp etc.). | `'hide'` |
 | itemsHideDuration | integer | Duration (in ms) of item hide effect. | `0` |
-| itemsShowEffect | string | What jQuery effect to use for showing items (slideDown etc.). | `show` |
+| itemsShowEffect | string | What jQuery effect to use for showing items (slideDown etc.). | `'show'` |
 | itemsShowDuration | integer | Duration (in ms) of item show effect. | `0` |
-| sectionsHideEffect | string | What jQuery effect to use for hiding sections (slideUp etc.). | `hide` |
+| sectionsHideEffect | string | What jQuery effect to use for hiding sections (slideUp etc.). | `'hide'` |
 | sectionsHideDuration | integer | Duration (in ms) of section hide effect. | `0` |
-| sectionsShowEffect | string | What jQuery effect to use for showing sections (slideDown etc.). | `show` |
+| sectionsShowEffect | string | What jQuery effect to use for showing sections (slideDown etc.). | `'show'` |
 | sectionsShowDuration | integer | Duration (in ms) of section show effect. | `0` |
 | onFilterComplete | function | Callback which is fired when the filtering process is complete. Recieves `matchedItems`, which is jQuery containing all matched items. | `null` |
 | markMatches | boolean | If true, matching text will get wrapped by a span having the class name of whatever the `matchCssClass` option is set to. | `false` |
