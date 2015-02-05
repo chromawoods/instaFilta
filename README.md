@@ -14,16 +14,25 @@ Options
 
 | Option | Type | Descriptions | Default value |
 |---|:-:|---|:-:|
+| scope | jQuery selector string | Classname of an element in which the input field and the targets are enclosed. Use this if you want to use multiple filter sections on your page | `null` |
 | targets | jQuery selector string | Classname of an individual item. | `'.instafilta-target'` |
 | sections | jQuery selector string | Classname of the sections holding the items. | `'.instafilta-section'` |
 | categoryDataAttr | string | Name of data attributes in which to look for categories. (read more below) | `'instafilta-category'` |
 | matchCssClass | string | Classname of the spans indicating matching text. | `'instafilta-match'` |
+| itemsHideEffect | string | What jQuery effect to use for hiding items (slideUp etc.). | `hide` |
+| itemsHideDuration | integer | Duration (in ms) of item hide effect. | `0` |
+| itemsShowEffect | string | What jQuery effect to use for showing items (slideDown etc.). | `show` |
+| itemsShowDuration | integer | Duration (in ms) of item show effect. | `0` |
+| sectionsHideEffect | string | What jQuery effect to use for hiding sections (slideUp etc.). | `hide` |
+| sectionsHideDuration | integer | Duration (in ms) of section hide effect. | `0` |
+| sectionsShowEffect | string | What jQuery effect to use for showing sections (slideDown etc.). | `show` |
+| sectionsShowDuration | integer | Duration (in ms) of section show effect. | `0` |
+| onFilterComplete | function | Callback which is fired when the filtering process is complete. Recieves `matchedItems`, which is jQuery containing all matched items. | `null` |
 | markMatches | boolean | If true, matching text will get wrapped by a span having the class name of whatever the `matchCssClass` option is set to. | `false` |
 | hideEmptySections | boolean | If using sections, this option decides whether to hide sections which did not have any matching items in them. | `true` |
 | beginsWith | boolean | We can choose to match the beginning of an item's text, or anywhere within. | `false` |
 | caseSensitive | boolean | Whether to ignore character casing. | `false` |
 | typeDelay | integer | The filtering process takes place on the keyUp event. If you have a large list of items to process, you might want to set a higher value (in milliseconds) to prevent the filtering to be able to occur so frequently. So in other words, it would kind of "wait" a bit while the user types. | `0` |
-| scope | jQuery selector string | Classname of an element in which the input field and the targets are enclosed. Use this if you want to use multiple filter sections on your page | `null` |
 | useSynonyms | boolean | When set to true, this option will also match user input against a synonym list. | `true` |
 | synonyms | object array | List of objects that contain synonyms. See section below. | *Common accents, see below.* |
 
@@ -35,7 +44,6 @@ Methods
 |---|:-:|---|:-:|
 | filterTerm | Can be used to programmatically apply a filter. For normal simple usage, you will probably not be needing this. | Filtering term (string) | Matched elements (jQuery) |
 | filterCategory | Applies a category filter that matches data attributes (see `categoryDataAttr`). | Category name (string) | Matched elements (jQuery) |
-
 
 
 Highlighting matching text

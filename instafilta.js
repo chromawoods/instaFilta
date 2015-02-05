@@ -1,6 +1,6 @@
 /*!
  * instaFilta
- * Version: 1.3
+ * Version: 1.4
  * Description: jQuery plugin for performing in-page filtering
  * Homepage and documentation: https://github.com/chromawoods/instaFilta
  * Author: Andreas Larsson <andreas@chromawoods.com> (http://chromawoods.com)
@@ -23,6 +23,15 @@
             sections: '.instafilta-section',
             categoryDataAttr: 'instafilta-category',
             matchCssClass: 'instafilta-match',
+            itemsHideEffect: 'hide',
+            itemsHideDuration: 0,
+            itemsShowEffect: 'show',
+            itemsShowDuration: 0,
+            sectionsHideEffect: 'hide',
+            sectionsHideDuration: 0,
+            sectionsShowEffect: 'show',
+            sectionsShowDuration: 0,
+            onFilterComplete: null,
             markMatches: false,
             hideEmptySections: true,
             beginsWith: false,
@@ -69,11 +78,12 @@
                 $scopeElement = $(this).closest(settings.scope);
                 $targets = $scopeElement.find(settings.targets);
                 $sections = $scopeElement.find(settings.sections);
-            } else {
+            } 
+
+            else {
                 $targets = $(settings.targets);
                 $sections = $(settings.sections);
             }
-
 
             /* Prepare value(s) to match against. */
             $targets.each(function() {
@@ -87,42 +97,65 @@
                     if (!settings.useSynonyms) { return values; }
 
                     for (var i = 0, l = s.length; i < l; i++) {
+
                         for (var j = 0; j < s[i].src.length; j++) {
                             normalized = normalized.replace(s[i].src[j], s[i].dst);
                         }
+
                     }
 
                     !!(normalized === original) || values.push(normalized);
+
                     return values;
+
                 }(settings.synonyms)));
 
             });
 
 
             /* Will hide any sections that don't have data-instafilta-hidden="false" */
-            var hideEmptySections = function() {
+            var toggleSections = function() {
 
                 $sections.each(function() {
+
                     var $section = $(this);
-                    $section.toggle(!!($section.find('[data-instafilta-hide="false"]').length));
+
+                    if ($section.find('[data-instafilta-hide="false"]').length) {
+                        $section[settings.sectionsShowEffect](settings.sectionsShowDuration);
+                    }
+
+                    else {
+                        $section[settings.sectionsHideEffect](settings.sectionsHideDuration);
+                    }
+
                 });
 
             };
 
 
-            var applyResults = function() {
-                var $shown = $targets.filter('[data-instafilta-hide="false"]').show();
+            /* Apply the results of the filtering process GUI-wise. */
+            var toggleResults = function(forceShowAll) {
 
-                $targets.filter('[data-instafilta-hide="true"]').hide();
+                var $matchedItems = (function() {
+                    return forceShowAll ? $targets.attr('data-instafilta-hide', 'false') : $targets;
+                }()).filter('[data-instafilta-hide="false"]')[settings.itemsShowEffect](settings.itemsShowDuration);
 
-                settings.hideEmptySections && hideEmptySections();
-                return $shown;
+                forceShowAll || $targets.filter('[data-instafilta-hide="true"]')[settings.itemsHideEffect](settings.itemsHideDuration);
+
+                settings.hideEmptySections && toggleSections();
+
+                /* Check if a callback function has been provided. */
+                if (typeof settings.onFilterComplete === 'function') {
+                    settings.onFilterComplete.apply(this, [$matchedItems]);
+                }
+
+                return $matchedItems;
             };
 
 
+            /* Reset the filter completely. */
             var showAll = function() {
-                $targets.attr('data-instafilta-hide', 'false').show();
-                $sections.show();
+                return toggleResults(true);
             };
 
 
@@ -174,7 +207,7 @@
                     $item.attr('data-instafilta-hide', (settings.beginsWith && matchedIndex !== 0) || matchedIndex < 0 ? 'true' : 'false');
                 });
 
-                return applyResults();
+                return toggleResults();
             };
 
 
@@ -213,8 +246,7 @@
 
                 });
 
-                category || showAll();
-                return applyResults();
+                return category ? toggleResults() : showAll();
             };
 
 
