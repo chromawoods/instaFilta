@@ -3,322 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>instaFilta demo</title>
-    <style type="text/css">
-        body { font-family: sans-serif; font-size: .9em; color: #333; margin: 1em 2%; }
-        input[type="text"], select { padding: .4em; border: 1px solid #ccc; border-radius: 4px; font-size: 1.2em; }
-        .scope { width: 46%; margin: 1em 2%; float: left; }
-        .section { border-bottom: 1px dashed #ccc; padding: .5em; }
-        .section-title { color: #7b7; margin-bottom: .5em; }
-        .section-list { padding: 0; margin: 0; list-style: none; }
-        .section-item { display: inline-block; margin: 0 3em 0 0; }
-        .instafilta-match { color: #7b7; }
-    </style>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <title>instaFilta in-page filtering plugin</title>
+    <link rel="stylesheet" type="text/css" href="demo.css">
 </head>
 <body>
-    <h1>instaFilta demo</h1>
-    <p>instaFilta is an in-page filtering jQuery plugin. Type something in the text field below to see it in action. The second area demonstrates the scope option, which allows multiple instances on the same page.</p>
 
-    <div class="scope" id="scope1">
-        <input type="text" id="instafilta-field1" placeholder="Type to filter">
+    <header class="header padded-content">
+        <h1 class="site-title">instaFilta</h1>
+        <em class="header-description">instaFilta is a fast and highly customizable in-page filtering jQuery plugin.</em>
+    </header>
 
-        <select id="instafilta-categories">
-            <option value="">Categories</option>
-            <option value="starwars">Star Wars</option>
-            <option value="hitchhikers">The Hitchhiker's Guide to the Galaxy</option>
-            <option value="cars">Cars</option>
-            <option value="r">Names that begin with 'R'</option>
-        </select>
+    <main class="main">
 
-        <div class="section">
-            <h2 class="section-title">A</h2>
-            <ul class="section-list">
-                <li class="section-item">Amy</li>
-                <li class="section-item" data-instafilta-category="starwars">Anakin Skywalker</li>
-                <li class="section-item">Albert</li>
-                <li class="section-item" data-instafilta-category="hitchhikers">Arthur</li>
-                <li class="section-item">Andy Panda</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">B</h2>
-            <ul class="section-list">
-                <li class="section-item">Bob</li>
-                <li class="section-item">Bonnie</li>
-                <li class="section-item">Boogie Woogie</li>
-                <li class="section-item">Barry</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">C</h2>
-            <ul class="section-list">
-                <li class="section-item">Carrie Bradshaw</li>
-                <li class="section-item">Carl</li>
-                <li class="section-item">Cindy</li>
-                <li class="section-item">Cameron</li>
-                <li class="section-item" data-instafilta-category="starwars">C-3PO</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">D</h2>
-            <ul class="section-list">
-                <li class="section-item">Dave</li>
-                <li class="section-item">Daryl</li>
-                <li class="section-item">Donna</li>
-                <li class="section-item">Danielle</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">E</h2>
-            <ul class="section-list">
-                <li class="section-item">Eric</li>
-                <li class="section-item">Emma</li>
-                <li class="section-item">Eliot</li>
-                <li class="section-item">Ed</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">F</h2>
-            <ul class="section-list">
-                <li class="section-item">Formulæ</li>
-                <li class="section-item" data-instafilta-category="hitchhikers, cars">Ford</li>
-                <li class="section-item">Frank</li>
-                <li class="section-item">Fridah</li>
-                <li class="section-item">Florian</li>
-                <li class="section-item">Florence</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">G</h2>
-            <ul class="section-list">
-                <li class="section-item">Georgie Porgie</li>
-                <li class="section-item">Garth</li>
-                <li class="section-item">Gillian</li>
-                <li class="section-item">Gandalf the Grey</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">H</h2>
-            <ul class="section-list">
-                <li class="section-item">Harry</li>
-                <li class="section-item">Harriet</li>
-                <li class="section-item">Helen</li>
-                <li class="section-item">Hannibal "the cannibal"</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">I</h2>
-            <ul class="section-list">
-                <li class="section-item">Ida</li>
-                <li class="section-item">Íris</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">J</h2>
-            <ul class="section-list">
-                <li class="section-item">Jacob</li>
-                <li class="section-item">Jennifer</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">K</h2>
-            <ul class="section-list">
-                <li class="section-item">Kodos</li>
-                <li class="section-item">Kang</li>
-                <li class="section-item">King</li>
-                <li class="section-item">Kong</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">L</h2>
-            <ul class="section-list">
-                <li class="section-item">Larry</li>
-                <li class="section-item">Lana</li>
-                <li class="section-item">Logan</li>
-                <li class="section-item">Lonesome Cowboy</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">M</h2>
-            <ul class="section-list">
-                <li class="section-item">Mega Man</li>
-                <li class="section-item">Morgan</li>
-                <li class="section-item">Mollie</li>
-            </ul>
-        </div>
+        <section class="section">
 
-        <div class="section">
-            <h2 class="section-title">N</h2>
-            <ul class="section-list">
-                <li class="section-item">Nick</li>
-                <li class="section-item">No Way José</li>
-                <li class="section-item">Nelly</li>
-                <li class="section-item">Nimda</li>
-            </ul>
-        </div>
+            <div class="padded-content-h">
+                <h2 class="section-title">Introduction</h2>
+            </div>
 
-        <div class="section">
-            <h2 class="section-title">O</h2>
-            <ul class="section-list">
-                <li class="section-item">Ollie Williams</li>
-                <li class="section-item">Om-nom</li>
-            </ul>
-        </div>
+            <div class="l-1-2">
+                <div class="padded-content-h">
+                    <p>Imagine that you are developing a page that has a huge list or table of data that is being generated by the server. Now imagine that you are an end-user that needs to scroll through all that data in order to find what is needed. This is where instaFilta can greatly improve that experience by filtering out unwanted items in real-time as the user types in a text field.<br>That's pretty much it.</p>
+                    <p>Oh, and it has a whole bunch of options available for you to customize that experince to your liking.</p>
+                </div>
+            </div>
+            <div class="box l-1-2">
+                <p>This demo page is meant to give you a quick idea if instaFilta is the right plugin for your project. Have you already decided? Great! Then you might want to get into the nitty gritty details. You will find everything you need on the instaFilta GitHub page.</p>
+                <a class="btn btn-prominent" href="https://github.com/chromawoods/instaFilta/" target="_blank">Technical documentation and download</a>
+            </div>
+        </section>
 
-        <div class="section">
-            <h2 class="section-title">P</h2>
-            <ul class="section-list">
-                <li class="section-item">Paul</li>
-                <li class="section-item">Peter</li>
-                <li class="section-item">Pierre</li>
-                <li class="section-item">Patty</li>
-            </ul>
-        </div>
+        <section class="section">
+            <div class="padded-content-h">
+                <h2 class="section-title">Table of contents</h2>
+                <ol>
+                    <li><a href="#s1">A simple example</a></li>
+                    <li><a href="#s2">Character casing and custom target classes</a></li>
+                    <li><a href="#s3">Highlighting matching characters</li>
+                    <li><a href="#s4">Only match the beginning of a word</a></li>
+                    <li><a href="#s5">Using sections of lists</a></li>
+                </ol>
+            </div>
+        </section>
 
-        <div class="section">
-            <h2 class="section-title">Q</h2>
-            <ul class="section-list">
-                <li class="section-item">Q (from James Bond, you know?)</li>
-            </ul>
-        </div>
+        <section class="section" id="s1">
+            <div class="l-1-2">
+                <div class="padded-content-h">
+                    <h2 class="section-title">A simple example</h2>
+                    <p>The following shows an example of using instaFilta's default options. You simply apply the instaFilta function on a text field.</p>
+                    <p>Try it out by entering some text in the input field above the target list. The plugin will bind to any elements having the CSS class <em>instafilta-target</em> and it will ignore character casing. As we will see in other examples, all of this can be customized through the plugin's options.</p>
+                </div>
+            </div>
+            <div class="box l-1-2">
+                <div class="example" id="ex1">
+                    <fieldset class="controls">
+                        <input type="text" id="ex1f" placeholder="Type here to filter">
+                    </fieldset>
+                    <ul class="example-list example-list-quad">
+                        <li><span class="instafilta-target">Carbon</span></li>
+                        <li><span class="instafilta-target">Cobalt</span></li>
+                        <li><span class="instafilta-target">Copper</span></li>
+                        <li><span class="instafilta-target">Gallium</span></li>
+                        <li><span class="instafilta-target">Gold</span></li>
+                        <li><span class="instafilta-target">Hafnium</span></li>
+                        <li><span class="instafilta-target">Iridium</span></li>
+                        <li><span class="instafilta-target">Xenon</span></li>
+                    </ul>
+                </div>
+                <pre class="box box-code">
+$('#my-input-field').instaFilta();</pre>
+            </div>
+        </section>
 
-        <div class="section" data-instafilta-category="r">
-            <h2 class="section-title">R</h2>
-            <ul class="section-list">
-                <li class="section-item">Raul</li>
-                <li class="section-item">Ralph</li>
-                <li class="section-item">Raphaël</li>
-                <li class="section-item">Ron Perlman</li>
-            </ul>
-        </div>
+        <section class="section" id="s2">
+            <div class="l-1-2">
+                <div class="padded-content-h">
+                    <h2 class="section-title">Character casing and custom target classes</h2>
+                    <p>In this example, the filtering term must match the character casing of the target elements. The plugin will not match "mars" but it will match "Mars".</p>
+                    <p>Also note that we can use a custom CSS class for our targets, if you need to adhere to naming conventions.</p>
+                </div>
+            </div>
+            <div class="box l-1-2">
+                <div class="example" id="ex2">
+                    <fieldset class="controls">
+                        <input type="text" id="ex2f" placeholder="Type here to filter">
+                    </fieldset>
+                    <ul class="example-list example-list-quad">
+                        <li><span class="planet-name">Mercury</span></li>
+                        <li><span class="planet-name">Venus</span></li>
+                        <li><span class="planet-name">Tellus</span></li>
+                        <li><span class="planet-name">Mars</span></li>
+                        <li><span class="planet-name">Jupiter</span></li>
+                        <li><span class="planet-name">Saturn</span></li>
+                        <li><span class="planet-name">Uranus</span></li>
+                        <li><span class="planet-name">Neptune</span></li>
+                    </ul>
+                </div>
+                <pre class="box box-code">
+$('#my-input-field').instaFilta({
+    targets: '.planet-name',
+    caseSensitive: true
+});</pre>
+            </div>
+        </section>
 
-        <div class="section">
-            <h2 class="section-title">S</h2>
-            <ul class="section-list">
-                <li class="section-item">Sammy</li>
-                <li class="section-item">Silly</li>
-                <li class="section-item">Sally</li>
-                <li class="section-item">Sully</li>
-            </ul>
-        </div>
+        <section class="section" id="s3">
+            <div class="l-1-2">
+                <div class="padded-content-h">
+                    <h2 class="section-title">Highlighting matching characters</h2>
+                    <p>By setting the <em>markMatches</em> option to <em>true</em>, you can highlight the matching text within the matching items in the list. The matching characters will get wrapped in a <em>span</em> element that has the <em>instafilta-match</em> CSS class. You can change this class by setting the <em>matchCssClass</em> option.</p>
+                </div>
+            </div>
+            <div class="box l-1-2">
+                <div class="example" id="ex3">
+                    <fieldset class="controls">
+                        <input type="text" id="ex3f" placeholder="Type here to filter">
+                    </fieldset>
+                    <ul class="example-list example-list-quad">
+                        <li><span class="instafilta-target">Superman</span></li>
+                        <li><span class="instafilta-target">Wonderwoman</span></li>
+                        <li><span class="instafilta-target">Batman</span></li>
+                        <li><span class="instafilta-target">Spiderman</span></li>
+                        <li><span class="instafilta-target">The Hulk</span></li>
+                        <li><span class="instafilta-target">The Green Lantern</span></li>
+                        <li><span class="instafilta-target">Elektra</span></li>
+                        <li><span class="instafilta-target">Ant Man</span></li>
+                    </ul>
+                </div>
+                <pre class="box box-code">
+$('#my-input-field').instaFilta({
+    markMatches: true
+});</pre>
+            </div>
+        </section>
 
-        <div class="section">
-            <h2 class="section-title">T</h2>
-            <ul class="section-list">
-                <li class="section-item">Thérèse</li>
-                <li class="section-item">Tyson</li>
-                <li class="section-item">Terry</li>
-                <li class="section-item" data-instafilta-category="starwars">Taun-taun</li>
-                <li class="section-item">Taylor</li>
-            </ul>
-        </div>
+        <section class="section" id="s4">
+            <div class="l-1-2">
+                <div class="padded-content-h">
+                    <h2 class="section-title">Only match the beginning of a word</h2>
+                    <p>Easy! Just set the <em>beginsWith</em> option to <em>true</em>.</p>
+                </div>
+            </div>
+            <div class="box l-1-2">
+                <div class="example" id="ex4">
+                    <fieldset class="controls">
+                        <input type="text" id="ex4f" placeholder="Type here to filter">
+                    </fieldset>
+                    <ul class="example-list example-list-quad">
+                        <li><span class="instafilta-target">Bald Bull</span></li>
+                        <li><span class="instafilta-target">Soda Popinski</span></li>
+                        <li><span class="instafilta-target">Don Flamenco</span></li>
+                        <li><span class="instafilta-target">Mike</span></li>
+                    </ul>
+                </div>
+                <pre class="box box-code">
+$('#my-input-field').instaFilta({
+    beginsWith: true
+});</pre>
+            </div>
+        </section>
 
-        <div class="section">
-            <h2 class="section-title">U</h2>
-            <ul class="section-list">
-                <li class="section-item">Ursula</li>
-                <li class="section-item">Uma</li>
-            </ul>
-        </div>
+        <section class="section" id="s5">
+            <div class="l-1-2">
+                <div class="padded-content-h">
+                    <h2 class="section-title">Using sections of lists</h2>
+                    <p>Many times, a large list of data will be grouped in some way. A group will typically contain a heading and perhaps more stuff. This example of animals is grouped by <a href="http://en.wikipedia.org/wiki/Class_(biology)" target="_blank">class</a>, which is the heading for each group.</p>
+                    <p>When filtering such a list, you probably want to hide the entire section, including heading etc. Just set the <em>instafilta-section</em> CSS class on the containing section element. That's it! And, you can of course customize that class name using the <em>sections</em> option.</p>
+                </div>
+            </div>
+            <div class="box l-1-2">
+                <div class="example" id="ex5">
+                    <fieldset class="controls">
+                        <input type="text" id="ex5f" placeholder="Type here to filter">
+                    </fieldset>
+                    <div class="instafilta-section">
+                        <span class="example-section-title">Mammals</span>
+                        <ul class="example-list example-list-quad">
+                            <li><span class="instafilta-target">Bear</span></li>
+                            <li><span class="instafilta-target">Badger</span></li>
+                            <li><span class="instafilta-target">Moose</span></li>
+                            <li><span class="instafilta-target">Hedgehog</span></li>
+                            <li><span class="instafilta-target">Tiger</span></li>
+                            <li><span class="instafilta-target">Orangutan</span></li>
+                            <li><span class="instafilta-target">Wombat</span></li>
+                            <li><span class="instafilta-target">Blue Whale</span></li>
+                        </ul>
+                    </div>
+                    <div class="instafilta-section">
+                        <span class="example-section-title">Reptiles</span>
+                        <ul class="example-list example-list-quad">
+                            <li><span class="instafilta-target">Snapping Turtle</span></li>
+                            <li><span class="instafilta-target">Nile Crocodile</span></li>
+                            <li><span class="instafilta-target">Tiger Snake</span></li>
+                            <li><span class="instafilta-target">Green Iguana</span></li>
+                            <li><span class="instafilta-target">Alligator</span></li>
+                            <li><span class="instafilta-target">Chameleon</span></li>
+                            <li><span class="instafilta-target">Gekko</span></li>
+                            <li><span class="instafilta-target">Black Mamba</span></li>
+                        </ul>
+                    </div>
+                    <div class="instafilta-section">
+                        <span class="example-section-title">Birds</span>
+                        <ul class="example-list example-list-quad">
+                            <li><span class="instafilta-target">Ostrich</span></li>
+                            <li><span class="instafilta-target">Atlantic Puffin</span></li>
+                            <li><span class="instafilta-target">Flamingo</span></li>
+                            <li><span class="instafilta-target">Hummingbird</span></li>
+                            <li><span class="instafilta-target">Penguin</span></li>
+                            <li><span class="instafilta-target">Albatross</span></li>
+                            <li><span class="instafilta-target">Toucan</span></li>
+                            <li><span class="instafilta-target">Mandarin Duck</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <pre class="box box-code">
+&lt;div class="instafilta-section">
+    &lt;h2>Birds&lt;/h2>
+    &lt;ul class="example-list">
+        &lt;li>&lt;span class="instafilta-target">Ostrich&lt;/span>&lt;/li>
+        &lt;li>&lt;span class="instafilta-target">Atlantic Puffin&lt;/span>&lt;/li>
+        &lt;li>&lt;span class="instafilta-target">Flamingo&lt;/span>&lt;/li>
+        &lt;li>&lt;span class="instafilta-target">Hummingbird&lt;/span>&lt;/li>
+        &lt;li>&lt;span class="instafilta-target">Penguin&lt;/span>&lt;/li>
+        &lt;li>&lt;span class="instafilta-target">Albatross&lt;/span>&lt;/li>
+        &lt;li>&lt;span class="instafilta-target">Toucan&lt;/span>&lt;/li>
+        &lt;li>&lt;span class="instafilta-target">Mandarin Duck&lt;/span>&lt;/li>
+    &lt;/ul>
+&lt;/div></pre>
+            </div>
+        </section>
 
-        <div class="section">
-            <h2 class="section-title">V</h2>
-            <ul class="section-list">
-                <li class="section-item">Victor</li>
-                <li class="section-item">Val</li>
-            </ul>
-        </div>
+    </main>
 
-        <div class="section">
-            <h2 class="section-title">W</h2>
-            <ul class="section-list">
-                <li class="section-item">Walter</li>
-                <li class="section-item">Wayland</li>
-                <li class="section-item">Walker</li>
-            </ul>
-        </div>
+    <a href="https://github.com/chromawoods/instaFilta"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
-        <div class="section">
-            <h2 class="section-title">X</h2>
-            <ul class="section-list">
-                <li class="section-item">Xerxes</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Y</h2>
-            <ul class="section-list">
-                <li class="section-item">You</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Z</h2>
-            <ul class="section-list">
-                <li class="section-item" data-instafilta-category="hitchhikers">Zaphod</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <div class="scope" id="scope2">
-        <input type="text" id="instafilta-field2" placeholder="Type to filter">
-
-        <div class="section">
-            <h2 class="section-title">This is just some random list</h2>
-            <ul class="section-list">
-                <li class="section-item">Stuff</li>
-                <li class="section-item">More stuff</li>
-                <li class="section-item">Even more</li>
-                <li class="section-item">...stuff!</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <a href="https://github.com/chromawoods/instaFilta"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
-
-    <script>
-        $(function() {
-
-            var $field1 = $('#instafilta-field1'),
-                $select = $('#instafilta-categories');
-
-            var filter1 = $field1.on('keyup', function() { 
-                $select.val(''); 
-            }).instaFilta({
-                scope: '#scope1',
-                targets: '.section-item',
-                sections: '.section',
-                markMatches: true
-            });
-
-            $select.on('change', function() {
-                $field1.val('');
-                filter1.filterCategory($(this).val());
-            });
-
-            $('#instafilta-field2').instaFilta({
-                scope: '#scope2',
-                targets: '.section-item',
-                markMatches: true
-            });
-
-        });
-    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Lily+Script+One" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" rel="stylesheet" type="text/css">
     <script src="instafilta.min.js"></script>
+    <script src="demo.js"></script>
+    
+    <footer class="footer padded-content">
+        Built and designed by <a href="http://chromawoods.com/">Andreas Larsson</a>
+    </footer>
+
 </body>
 </html>
