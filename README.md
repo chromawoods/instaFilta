@@ -14,7 +14,7 @@ Options
 
 | Option | Type | Descriptions | Default value |
 |---|:-:|---|:-:|
-| scope | jQuery selector string | Classname of an element in which the input field and the targets are enclosed. Use this if you want to use multiple filter sections on your page | `null` |
+| scope | jQuery selector string | Selector of an element in which the input field and the targets are enclosed. Use this if you want to use multiple filter sections on your page | `null` |
 | targets | jQuery selector string | Classname of an individual item. | `'.instafilta-target'` |
 | sections | jQuery selector string | Classname of the sections holding the items. | `'.instafilta-section'` |
 | categoryDataAttr | string | Name of data attributes in which to look for categories. (read more below) | `'instafilta-category'` |
