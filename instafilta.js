@@ -233,7 +233,6 @@
 
                         for (var i = 0; i < targetCats.length; i++) {
                             for (var j = 0; j < categories.length; j++) {
-                                console.log(targetCats[i], categories[j]);
                                 if (targetCats[i] === categories[j]) {
                                     hideStatus = false;
                                     break;
