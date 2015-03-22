@@ -1,7 +1,13 @@
 $(function() {
 
+    var $resultMessage = $('#some-result-message');
+
     $('#ex1f').instaFilta({
         scope: '#ex1'
+    });
+
+    $('#ex1-2f').instaFilta({
+        scope: '#ex1-2'
     });
 
     $('#ex2f').instaFilta({
@@ -23,6 +29,18 @@ $(function() {
     $('#ex5f').instaFilta({
         scope: '#ex5',
         beginsWith: true
+    });
+
+    $('#ex6f').instaFilta({
+        scope: '#ex6',
+        onFilterComplete: function(matchedItems) {
+
+            var message = matchedItems.length 
+                ? "I found " + matchedItems.length + " matches!"
+                : "I couldn't find a thing..";
+
+            $resultMessage.text(message);
+        }
     });
 
 });

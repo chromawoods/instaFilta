@@ -38,10 +38,12 @@
                 <h2 class="section-title">Table of contents</h2>
                 <ol>
                     <li><a href="#s1">A simple example</a></li>
+                    <li><a href="#s1-2">Target ALL the things!</a></li>
                     <li><a href="#s2">Character casing and custom target classes</a></li>
                     <li><a href="#s3">Highlighting matching characters</li>
                     <li><a href="#s4">Only match the beginning of a word</a></li>
                     <li><a href="#s5">Using sections of lists</a></li>
+                    <li><a href="#s6">onFilterComplete returns matched hits</a></li>
                 </ol>
             </div>
         </section>
@@ -72,6 +74,56 @@
                 </div>
                 <pre class="box box-code">
 $('#my-input-field').instaFilta();</pre>
+            </div>
+        </section>
+
+        <section class="section" id="s1-2">
+            <div class="l-1-2">
+                <div class="padded-content-h">
+                    <h2 class="section-title">Target ALL the things!</h2>
+                    <p>The plugin will look for <em>any</em> text inside an element having the instafilta-target class. In this example, not only can you filter on these important people's names, you can also filter on the year they were born.</p>
+                </div>
+            </div>
+            <div class="box l-1-2">
+                <div class="example" id="ex1-2">
+                    <fieldset class="controls">
+                        <input type="text" id="ex1-2f" placeholder="Type here to filter">
+                    </fieldset>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th><th>Born</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="instafilta-target">
+                                <td>Albert Einstein</td>
+                                <td>1879</td>
+                            </tr>
+                            <tr class="instafilta-target">
+                                <td>Marie Curie</td>
+                                <td>1867</td>
+                            </tr>
+                            <tr class="instafilta-target">
+                                <td>Isaac Newton</td>
+                                <td>1643</td>
+                            </tr>
+                            <tr class="instafilta-target">
+                                <td>Henry Cavendish</td>
+                                <td>1731</td>
+                            </tr>
+                            <tr class="instafilta-target">
+                                <td>Edwin Hubble</td>
+                                <td>1889</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <pre class="box box-code">
+&lt;tr class="instafilta-target">
+    &lt;td>Albert Einstein&lt;/td>
+    &lt;td>1879&lt;/td>
+&lt;/tr></pre>
             </div>
         </section>
 
@@ -230,6 +282,41 @@ $('#my-input-field').instaFilta({
         &lt;li>&lt;span class="instafilta-target">Mandarin Duck&lt;/span>&lt;/li>
     &lt;/ul>
 &lt;/div></pre>
+            </div>
+        </section>
+
+        <section class="section" id="s6">
+            <div class="l-1-2">
+                <div class="padded-content-h">
+                    <h2 class="section-title">onFilterComplete returns matched hits</h2>
+                    <p>After the filtering process is done, you might want to report just how many hits were found and perhaps show some message if no hits were found. This example shows you how.</p>
+                </div>
+            </div>
+            <div class="box l-1-2">
+                <div class="example" id="ex6">
+                    <fieldset class="controls">
+                        <input type="text" id="ex6f" placeholder="Type here to filter">
+                        <span class="result-message" id="some-result-message"></span>
+                    </fieldset>
+                    <ul class="example-list example-list-quad">
+                        <li><span class="instafilta-target">Peter</span></li>
+                        <li><span class="instafilta-target">Lois</span></li>
+                        <li><span class="instafilta-target">Stewie</span></li>
+                        <li><span class="instafilta-target">Chris</span></li>
+                    </ul>
+                <pre class="box box-code">
+var $myMessage = $('#some-result-message');
+
+$('#my-input-field').instaFilta({
+    onFilterComplete: function(matchedItems) {
+
+        var message = (matchedItems.length > 0)
+            ? "I found " + matchedItems.length + " matches!"
+            : "I couldn't find a thing..";
+
+        $myMessage.text(message);
+    }
+});</pre>
             </div>
         </section>
 
