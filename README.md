@@ -9,6 +9,20 @@ Live demo
 ---------
 http://chromawoods.com/instafilta/demo/
 
+
+General usage
+-------------
+Call instaFilta on the text field that should be observed, passing any of the options in an object. In the below example, we have specified that we only want to match items that begin with whatever the user types in the text field.
+
+
+```javascript
+$('#username-filtering').instaFilta({
+    targets: '.username',
+    beginsWith: true
+});
+```
+
+
 Options
 -------
 
@@ -79,38 +93,27 @@ You can use synonyms to allow several characters or even words to match one sing
 
 Categories
 ----------
-By appending a data-attribute named according to setting `categoryDataAttr`, it is possible to "label" sections and/or individual items. Use the `filterCategory` method to apply the category filter. You would typically use this together with a *select* element. Both sections and target items can belong to multiple categories, just separate them with a comma.
-
-In the below example, we have chosen to categorize individual items. Note that an item can belong to several categories.
+By appending a data-attribute named according to setting `categoryDataAttr`, it is possible to "label" or "tag" items. Use the `filterCategory` method to apply the category filter. You would typically use this together with some form element like a *select* or *checkbox*. Target items can belong to multiple categories, just separate them with a comma. The category parameter passed to filterCategory can also contain several comma separated categories.
 
 ```html
 <li class="instafilta-target" data-instafilta-category="human">John Connor</li>
 <li class="instafilta-target" data-instafilta-category="machine">Terminator</li>
-<li class="instafilta-target" data-instafilta-category="human,machine">RoboCop</li>
+<li class="instafilta-target" data-instafilta-category="human,machine,both">RoboCop</li>
 ```
-
-In the next example, an entire section has been defined as a category.
-
-```html
-<ul class="instafilta-section" data-instafilta-category="machines">
-    <li class="instafilta-target">Johnny 5</li>
-    <li class="instafilta-target">R2-D2</li>
-    <li class="instafilta-target">RoboCop</li>
-</ul>
-```
-
-
-Usage
------
-Call instaFilta on the text field that should be observed, passing any of the options in an object. In the below example, we have specified that we only want to match items that begin with whatever the user types in the text field.
-
 
 ```javascript
-$('#username-filtering').instaFilta({
-    targets: '.username',
-    beginsWith: true
-});
+var insta = $('#some-input').instaFilta();
+
+/* This will show "John Connor" and "RoboCop" */
+insta.filterCategory('human');
+
+/* This will show "Terminator" and "RoboCop" */
+insta.filterCategory('machine');
+
+/* This will show only "RoboCop" */
+insta.filterCategory('both');
 ```
+
 
 Multiple Filter Usage
 ---------------------
@@ -118,7 +121,7 @@ If you have want to use instaFilta on more than one text input, you must supply 
 
 ```javascript
 $('#username-filtering').instaFilta({
-    scope: '.containerDiv',
+    scope: '.container-div',
     targets: '.username',
     beginsWith: true
 });

@@ -1,6 +1,6 @@
 /*!
  * instaFilta
- * Version: 1.4
+ * Version: 1.4.2
  * Description: jQuery plugin for performing in-page filtering
  * Homepage and documentation: https://github.com/chromawoods/instaFilta
  * Author: Andreas Larsson <andreas@chromawoods.com> (http://chromawoods.com)
@@ -211,42 +211,42 @@
             };
 
 
-            /* Filter items depending on category data attribute. Categories can be comma separated. */
-            _filterCategory = function(category) {
+            /* Filter items depending on category data attribute. Categories can be comma separated. 
+             * Shows all targets if categories is falsy. */
+            _filterCategory = function(categories) {
 
-                var getCats = function($elem) {
-                    return ($elem.data(settings.categoryDataAttr) || '').split(',');
-                };
+                if (categories) {
+                    categories = categories.split(',');
+                }
 
-                /* Find sections that are categories. */
-                $sections.each(function() {
+                else { return showAll(); }
 
-                    var $sect = $(this)
-                        sectCategories = getCats($sect);
+                $targets.each(function() {
 
-                    /* Find items that belong to categories. */
-                    $sect.find(settings.targets).each(function() {
+                    var hideStatus = true, 
+                        $item = $(this), 
+                        targetCats = $item.data(settings.categoryDataAttr);
 
-                        var $item = $(this), 
-                            hasCategory = false,
-                            categories = getCats($item).concat(sectCategories);
+                    if (targetCats) {
 
-                        for (var i = 0; i < categories.length; i++) {
+                        targetCats = targetCats.split(',');
 
-                            /* Strip whitespace and compare. */
-                            if (category === categories[i].replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')) { 
-                                hasCategory = true;
-                                break;
+                        for (var i = 0; i < targetCats.length; i++) {
+                            for (var j = 0; j < categories.length; j++) {
+                                console.log(targetCats[i], categories[j]);
+                                if (targetCats[i] === categories[j]) {
+                                    hideStatus = false;
+                                    break;
+                                }
                             }
                         }
 
-                        $item.html($item.data('originalText'))
-                            .attr('data-instafilta-hide', hasCategory ? false : true);
-                    });
+                        $item.html($item.data('originalText')).attr('data-instafilta-hide', hideStatus);
+                    }
 
                 });
 
-                return category ? toggleResults() : showAll();
+                return toggleResults();
             };
 
 
