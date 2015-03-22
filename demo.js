@@ -43,4 +43,12 @@ $(function() {
         }
     });
 
+    var ex7 = $('#ex7f').instaFilta({
+        scope: '#ex7'
+    });
+
+    $('#ex7s').on('change', function() {
+        ex7.filterCategory($(this).val());
+    });
+
 });

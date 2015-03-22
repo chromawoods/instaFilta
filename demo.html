@@ -44,6 +44,7 @@
                     <li><a href="#s4">Only match the beginning of a word</a></li>
                     <li><a href="#s5">Using sections of lists</a></li>
                     <li><a href="#s6">onFilterComplete returns matched hits</a></li>
+                    <li><a href="#s7">Categorize/tag items</a></li>
                 </ol>
             </div>
         </section>
@@ -304,7 +305,7 @@ $('#my-input-field').instaFilta({
                         <li><span class="instafilta-target">Stewie</span></li>
                         <li><span class="instafilta-target">Chris</span></li>
                     </ul>
-                <pre class="box box-code">
+                    <pre class="box box-code">
 var $myMessage = $('#some-result-message');
 
 $('#my-input-field').instaFilta({
@@ -320,6 +321,55 @@ $('#my-input-field').instaFilta({
             </div>
         </section>
 
+        <section class="section" id="s7">
+            <div class="l-1-2">
+                <div class="padded-content-h">
+                    <h2 class="section-title">Categorize/tag items</h2>
+                    <p>This is a bit similar to using sections, but it has some important differences. You can tag individual target items with several categories. Do this by defining one or more (comma separated) categories in a data-attribute associated with the <em>categoryDataAttr</em> option. You can then use the <em>filterCategory</em> method to perform filtering based on those categories.</p>
+                    <p>In this example, a select box is used to filter out humans and machines. Note that "RoboCop" exists in both the <em>machine</em> category and the <em>human</em> category.</p>
+                </div>
+            </div>
+            <div class="box l-1-2">
+                <div class="example" id="ex7">
+                    <fieldset class="controls">
+                        <input type="text" id="ex7f" placeholder="Type here to filter">
+                        <select id="ex7s">
+                            <option value="">Show all</option>
+                            <option value="machine">Machines</option>
+                            <option value="human">Humans</option>
+                            <option value="non-fictional">Non-fictional</option>
+                        </select>
+                    </fieldset>
+                    <ul class="example-list example-list-quad">
+                        <li><span class="instafilta-target" data-instafilta-category="machine">R2-D2</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="machine">Terminator</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="human">John Connor</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="human,non-fictional">Andreas Larsson</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="machine">Johnny 5</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="human">Gordon Freeman</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="machine">Wall-E</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="human,machine">RoboCop</span></li>
+                    </ul>
+                    <h3 class="lesser-title">If the HTML looks like this..</h3>
+                    <pre class="box box-code">
+&lt;span class="instafilta-target" data-instafilta-category="human">Gordon Freeman&lt;/span>
+&lt;span class="instafilta-target" data-instafilta-category="machine">Wall-E&lt;/span>
+&lt;span class="instafilta-target" data-instafilta-category="human,machine,both">RoboCop&lt;/span></pre>
+                    <h3 class="lesser-title">..then we can filter it by category like this</h3>
+                    <pre class="box box-code">
+var insta = $('#filtering').instaFilta();
+
+/* This will show "Gordon Freeman" and "RoboCop" */
+insta.filterCategory('human');
+
+/* This will show "Wall-E" and "RoboCop" */
+insta.filterCategory('machine');
+
+/* This will only show "RoboCop" */
+insta.filterCategory('both');</pre>
+            </div>
+        </section>
+
     </main>
 
     <a href="https://github.com/chromawoods/instaFilta"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
@@ -327,7 +377,7 @@ $('#my-input-field').instaFilta({
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link href="http://fonts.googleapis.com/css?family=Lily+Script+One" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" rel="stylesheet" type="text/css">
-    <script src="instafilta.min.js"></script>
+    <script src="instafilta.js"></script>
     <script src="demo.js"></script>
     
     <footer class="footer padded-content">

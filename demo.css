@@ -114,11 +114,17 @@ a:hover, a:active { color: #fcd271; }
     overflow-y: hidden;
 }
 
-.section-title {
+.section-title,
+.lesser-title {
     margin: 0 0 .5em;
     font-size: 1.8em;
     font-weight: normal;
     line-height: 1em;
+}
+
+.lesser-title { 
+    margin-top: 1.5em; 
+    font-size: 1em; 
 }
 
 .padded-content,
@@ -156,7 +162,7 @@ a:hover, a:active { color: #fcd271; }
 
 .example-list {
     padding: 0;
-    margin: .5em 0;
+    margin: .5em 0 1em;
     list-style: none;
     overflow-y: hidden;
 }
@@ -198,6 +204,7 @@ span.instafilta-target, .planet-name { display: block; }
     font-weight: bold;
 }
 
+#ex7f { display: none; }
 
 @media all and (max-width: 960px) {
 
