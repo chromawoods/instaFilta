@@ -1,38 +1,45 @@
 $(function() {
 
-    var $resultMessage = $('#some-result-message');
 
     $('#ex1f').instaFilta({
         scope: '#ex1'
     });
 
-    $('#ex1-2f').instaFilta({
-        scope: '#ex1-2'
-    });
 
     $('#ex2f').instaFilta({
-        scope: '#ex2',
+        scope: '#ex2'
+    });
+
+
+    $('#ex3f').instaFilta({
+        scope: '#ex3',
         targets: '.planet-name',
         caseSensitive: true
     });
 
-    $('#ex3f').instaFilta({
-        scope: '#ex3',
-        markMatches: true
-    });
 
     $('#ex4f').instaFilta({
         scope: '#ex4',
-        beginsWith: true
+        markMatches: true
     });
+
 
     $('#ex5f').instaFilta({
         scope: '#ex5',
         beginsWith: true
     });
 
+
     $('#ex6f').instaFilta({
         scope: '#ex6',
+        beginsWith: true
+    });
+
+
+    var $resultMessage = $('#some-result-message');
+
+    $('#ex7f').instaFilta({
+        scope: '#ex7',
         onFilterComplete: function(matchedItems) {
 
             var message = matchedItems.length 
@@ -43,12 +50,33 @@ $(function() {
         }
     });
 
-    var ex7 = $('#ex7f').instaFilta({
-        scope: '#ex7'
+
+    var ex8 = $('#ex8f').instaFilta({
+        scope: '#ex8'
     });
 
-    $('#ex7s').on('change', function() {
-        ex7.filterCategory($(this).val());
+    $('#ex8s').on('change', function() {
+        ex8.filterCategory($(this).val());
+    });
+
+
+    var ex9 = $('#ex9f').instaFilta({
+        scope: '#ex9'
+    });
+
+    var $ex9Checkboxes = $('#ex9 [type=checkbox]');
+
+    $ex9Checkboxes.on('change', function() {
+
+        var checkedCategories = [];
+
+        $ex9Checkboxes.each(function() {
+            if ($(this).prop('checked')) {
+                checkedCategories.push($(this).val());
+            }
+        });
+
+        ex9.filterCategory(checkedCategories);
     });
 
 });

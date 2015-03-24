@@ -33,6 +33,8 @@ input, select, textarea {
     border-radius: 4px; 
 }
 
+input[type="checkbox"] { margin-right: .5em; }
+
 table { 
     margin: 1em 0; 
     background: ;
@@ -49,6 +51,8 @@ td {
 }
 
 p { margin: 0 0 1em; }
+
+label { margin-right: 1em; }
 
 a { color: #f78d3f; }
 a:hover, a:active { color: #fcd271; }
@@ -204,7 +208,7 @@ span.instafilta-target, .planet-name { display: block; }
     font-weight: bold;
 }
 
-#ex7f { display: none; }
+#ex8f, #ex9f { display: none; }
 
 @media all and (max-width: 960px) {
 
