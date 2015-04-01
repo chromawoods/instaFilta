@@ -208,7 +208,7 @@ span.instafilta-target, .planet-name { display: block; }
     font-weight: bold;
 }
 
-#ex8f, #ex9f { display: none; }
+#ex8f, #ex9f, #ex10f { display: none; }
 
 @media all and (max-width: 960px) {
 

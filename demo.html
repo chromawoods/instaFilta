@@ -46,6 +46,7 @@
                     <li><a href="#s7">onFilterComplete returns matched hits</a></li>
                     <li><a href="#s8">Categorize/tag items</a></li>
                     <li><a href="#s9">Yes, checkboxes!!</a></li>
+                    <li><a href="#s10">All or nothing</a></li>
                 </ol>
             </div>
         </section>
@@ -407,7 +408,7 @@ insta.filterCategory('both');</pre>
                     <h3 class="lesser-title">The checkboxes look like this..</h3>
                     <pre class="box box-code">
 &lt;input type="checkbox" value="europe"></pre>
-                    <h3 class="lesser-title">..and the JavaScript like this:</h3>
+                    <h3 class="lesser-title">..and the JavaScript looks like this:</h3>
                     <pre class="box box-code">
 var instaFilta = $('.continents').instaFilta();
 
@@ -424,6 +425,59 @@ $myCheckboxes.on('change', function() {
     });
 
     instaFilta.filterCategory(checkedCategories);
+});</pre>
+            </div>
+        </section>
+
+        <section class="section" id="s10">
+            <div class="l-1-2">
+                <div class="padded-content-h">
+                    <h2 class="section-title">All or nothing</h2>
+                    <p>When applying multiple categories at once, instaFilta will match <em>any</em> matching categories. In some cases however, like this following example, you want to make sure that items only match if they belong to <em>all</em> categories.</p>
+                </div>
+            </div>
+            <div class="box l-1-2">
+                <div class="example" id="ex10">
+                    <fieldset class="controls">
+                        <input type="text" id="ex10f" placeholder="Type here to filter">
+                        <label for="ex10-cat1"><input type="checkbox" id="ex10-cat1" value="swims">Swims</label>
+                        <label for="ex10-cat2"><input type="checkbox" id="ex10-cat2" value="walks">Walks</label>
+                        <label for="ex10-cat3"><input type="checkbox" id="ex10-cat3" value="flies">Flies</label>
+                        <label for="ex10-cat4"><input type="checkbox" id="ex10-cat4" value="trots">Trots</label>
+                    </fieldset>
+                    <ul class="example-list example-list-quad">
+                        <li><span class="instafilta-target" data-instafilta-category="walks,flies">Ladybug</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="walks">Porcupine</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="swims">Bullshark</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="swims,walks">Crocodile</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="walks">Camel</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="swims,walks">Iguana</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="swims,walks,flies,trots">Unicorn</span></li>
+                        <li><span class="instafilta-target" data-instafilta-category="swims,flies">Flying Fish</span></li>
+                    </ul>
+                    <h3 class="lesser-title">Example markup</h3>
+                    <pre class="box box-code">
+&lt;input type="checkbox" value="walks">
+&lt;input type="checkbox" value="flies">
+
+&lt;span class="instafilta-target" data-instafilta-category="walks,flies">Ladybug&lt;/span></pre>
+                    <h3 class="lesser-title">Example JavaScript (notice the second parameter, which is set to true)</h3>
+                    <pre class="box box-code">
+var instaFilta = $('.animals').instaFilta();
+
+var $myCheckboxes = $('.ability-check');
+
+$myCheckboxes.on('change', function() {
+
+    var checkedCategories = [];
+
+    $myCheckboxes.each(function() {
+        if ($(this).prop('checked')) {
+            checkedCategories.push($(this).val());
+        }
+    });
+
+    instaFilta.filterCategory(checkedCategories, true);
 });</pre>
             </div>
         </section>

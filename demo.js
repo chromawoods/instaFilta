@@ -79,4 +79,24 @@ $(function() {
         ex9.filterCategory(checkedCategories);
     });
 
+
+    var ex10 = $('#ex10f').instaFilta({
+        scope: '#ex10'
+    });
+
+    var $ex10Checkboxes = $('#ex10 [type=checkbox]');
+
+    $ex10Checkboxes.on('change', function() {
+
+        var checkedCategories = [];
+
+        $ex10Checkboxes.each(function() {
+            if ($(this).prop('checked')) {
+                checkedCategories.push($(this).val());
+            }
+        });
+
+        ex10.filterCategory(checkedCategories, true);
+    });
+
 });
