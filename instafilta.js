@@ -1,6 +1,6 @@
 /*!
  * instaFilta
- * Version: 1.4.3
+ * Version: 1.4.4
  * Description: jQuery plugin for performing in-page filtering
  * Homepage and documentation: https://github.com/chromawoods/instaFilta
  * Author: Andreas Larsson <andreas@chromawoods.com> (http://chromawoods.com)
@@ -213,7 +213,7 @@
 
             /* Filter items depending on category data attribute. Categories can be a comma separated
              * string or an array of strings. Shows all targets if categories is falsy. */
-            _filterCategory = function(categories) {
+            _filterCategory = function(categories, requireAll) {
 
                 if (!categories || !categories.length) {
                     return showAll();
@@ -226,6 +226,7 @@
                 $targets.each(function() {
 
                     var hideStatus = true, 
+                        matched = 0,
                         $item = $(this), 
                         targetCats = $item.data(settings.categoryDataAttr);
 
@@ -236,12 +237,13 @@
                         for (var i = 0; i < targetCats.length; i++) {
                             for (var j = 0; j < categories.length; j++) {
                                 if (targetCats[i] === categories[j]) {
-                                    hideStatus = false;
-                                    break;
+                                    if (requireAll) { matched++; }
+                                    else { hideStatus = false; break; }
                                 }
                             }
                         }
 
+                        if (requireAll && matched === categories.length) { hideStatus = false; }
                         $item.html($item.data('originalText')).attr('data-instafilta-hide', hideStatus);
                     }
 

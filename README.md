@@ -53,11 +53,24 @@ Options
 
 Methods
 -------
-
-| Name | Description | Parameters | Returns |
+### filterTerm
+Can be used to programmatically apply a filter. For normal simple usage, you will probably not be needing this.
+#### Returns
+Matched elements (jQuery)
+#### Parameters
+| Parameters | Description | Type | Default value |
 |---|:-:|---|:-:|
-| filterTerm | Can be used to programmatically apply a filter. For normal simple usage, you will probably not be needing this. | Filtering term (string) | Matched elements (jQuery) |
-| filterCategory | Applies a category filter that matches data attributes (see `categoryDataAttr`). | Category name (string) | Matched elements (jQuery) |
+| term | What search string to filter on. | string | undefined (will show all targets) |
+
+### filterCategory
+Can be used to filter on one or more categories. See demo page for live examples.
+#### Returns
+Matched elements (jQuery)
+#### Parameters
+| Parameters | Description | Type | Default value |
+|---|:-:|---|:-:|
+| categories | One or more categories to use. | string, comma separated string or array of strings | undefined (will show all targets) |
+| requireAll | If true, *ALL* categories must match each item, rather than *any*. | boolean | false |
 
 
 Highlighting matching text
