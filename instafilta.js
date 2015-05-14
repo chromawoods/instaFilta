@@ -175,7 +175,6 @@
                     var $item = $(this);
 
                     if (!$item.data('originalText')) {
-                        //$item.data('originalHtml', $item.html());
                         $item.data('originalHtml', $item.text());
                         $item.data('originalText', $item.data('values')[0]);
                     }
